@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+  background-color: rgb(197, 139, 139);
+  padding: 8px;
+}
+
+.data{
+  display:flex;
+  width:40%;
+  justify-content: space-between;
+  padding:1px;
+ background-color:burlywood;
+ border: 0.5px solid;
+}
