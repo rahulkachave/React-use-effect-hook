@@ -1,0 +1,48 @@
+import logo from './logo.svg';
+import './App.css';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+
+function App() {
+const [myData ,setMyData]=useState([]);
+const[iserror,setIserror] =useState("");
+  // useEffect(()=>{                       //without async method
+  //   axios.get("https://jsonplaceholder.typicode.com/posts")
+  //   .then((res)=>setMyData(res.data) )
+  //   .catch((error)=>setIserror(error.message));
+  // },[]);
+
+  const getApiData= async()=>{      //using asyn method
+    try {
+      const res =await axios.get("https://jsonplaceholder.typicode.com/posts");
+      setMyData(res.data);
+
+    } catch (error) {
+      setIserror(error.message);
+    }
+  };
+useEffect(()=>{
+  getApiData();
+},[]);
+
+
+  return (
+    <div className="App">
+      <h1>Axios Is A package</h1>
+      {iserror !==""&&<h2>{iserror}</h2>}
+      <div className='grid'>
+    {myData.slice(0,12).map((post) =>{
+      const  {id,title,body} =post;
+      return <div className='card' key ={id}>
+        <h2>{title.slice(0,15).toUpperCase()}</h2>
+        <p>{body.slice(0.100)}</p>
+      </div>
+    }
+    
+    )}
+</div>
+    </div>
+  );
+}
+
+export default App;
